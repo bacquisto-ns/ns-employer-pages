@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NueSynergy - Contact Information Change Form</title>
+    <!-- Performance: Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" as="script">
+    
+    <!-- Load CSS and JavaScript -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #1E4E6B;
+            --secondary-green: #A4C639;
+            --background-light: #F0F4F0;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .nue-primary {
+            background-color: var(--primary-blue);
+        }
+        
+        .nue-secondary {
+            background-color: var(--secondary-green);
+        }
+        
+        .nue-primary-text {
+            color: var(--primary-blue);
+        }
+        
+        .nue-secondary-text {
+            color: var(--secondary-green);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--secondary-green) 0%, var(--primary-blue) 100%);
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(30, 78, 107, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(30, 78, 107, 0.1);
+        }
+        
+        .step-card:hover {
+            box-shadow: 0 16px 48px rgba(30, 78, 107, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .form-input {
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .form-input:focus {
+            border-color: var(--secondary-green);
+            box-shadow: 0 0 0 3px rgba(164, 198, 57, 0.1);
+            outline: none;
+            transform: translateY(-1px);
+        }
+        
+        .form-input.error {
+            border-color: #EF4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .checkbox-custom {
+            accent-color: var(--secondary-green);
+            transform: scale(1.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(30, 78, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, #8fb332 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(164, 198, 57, 0.3);
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(164, 198, 57, 0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Enhanced animations for anime.js */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Process visualization */
+        .process-visualization {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(30, 78, 107, 0.1);
+        }
+        
+        /* Journey Step Cards */
+        .journey-step {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            transition: all 0.3s ease;
+            cursor: default;
+            overflow: hidden;
+        }
+        
+        .journey-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--secondary-green), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .journey-step:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .journey-step-inner {
+            position: relative;
+            text-align: center;
+        }
+        
+        .journey-icon-wrapper {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #f0f4f0 0%, #e5e7eb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .journey-icon {
+            font-size: 1.5rem;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+        
+        .journey-number {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .journey-checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 70px;
+            height: 70px;
+            background: var(--secondary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2;
+        }
+        
+        .journey-checkmark i {
+            color: white;
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+        
+        .journey-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .journey-description {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
+        
+        /* Active State */
+        .journey-step.active {
+            background: linear-gradient(135deg, #A4C639 0%, #8fb030 100%);
+            border-color: #A4C639;
+            box-shadow: 0 8px 24px rgba(164, 198, 57, 0.3);
+            transform: translateY(-4px);
+        }
+        
+        .journey-step.active .journey-icon-wrapper {
+            background: rgba(255, 255, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .journey-step.active .journey-icon {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .journey-step.active .journey-number {
+            background: linear-gradient(135deg, #1E4E6B 0%, #2a5f7f 100%);
+            box-shadow: 0 4px 12px rgba(30, 78, 107, 0.4);
+        }
+        
+        .journey-step.active .journey-title,
+        .journey-step.active .journey-description {
+            color: white;
+            font-weight: 700;
+        }
+        
+        /* Completed State */
+        .journey-step.completed {
+            background: linear-gradient(135deg, #1E4E6B 0%, #2a5f7f 100%);
+            border-color: #1E4E6B;
+            box-shadow: 0 4px 16px rgba(30, 78, 107, 0.2);
+        }
+        
+        .journey-step.completed .journey-icon-wrapper {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .journey-step.completed .journey-icon {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .journey-step.completed .journey-checkmark {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .journey-step.completed .journey-checkmark.hidden {
+            display: flex !important;
+        }
+        
+        .journey-step.completed .journey-number {
+            background: linear-gradient(135deg, #A4C639 0%, #8fb030 100%);
+        }
+        
+        .journey-step.completed .journey-title,
+        .journey-step.completed .journey-description {
+            color: white;
+        }
+        
+        /* Pending State */
+        .journey-step.pending {
+            opacity: 0.7;
+        }
+        
+        .journey-step.pending:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Shimmer animation for progress bar */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+        
+        .animate-shimmer {
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        /* Success animation */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        
+        .success-checkmark .check-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid #A4C639;
+        }
+        
+        .success-checkmark .icon-line {
+            height: 5px;
+            background-color: #A4C639;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+        }
+        
+        .success-checkmark .icon-line.line-tip {
+            top: 46px;
+            left: 14px;
+            width: 25px;
+            transform: rotate(45deg);
+            animation: icon-line-tip 0.75s;
+        }
+        
+        .success-checkmark .icon-line.line-long {
+            top: 38px;
+            right: 8px;
+            width: 47px;
+            transform: rotate(-45deg);
+            animation: icon-line-long 0.75s;
+        }
+        
+        @keyframes icon-line-tip {
+            0% { width: 0; left: 1px; top: 19px; }
+            54% { width: 0; left: 1px; top: 19px; }
+            70% { width: 50px; left: -8px; top: 37px; }
+            84% { width: 17px; left: 21px; top: 48px; }
+            100% { width: 25px; left: 14px; top: 45px; }
+        }
+        
+        @keyframes icon-line-long {
+            0% { width: 0; right: 46px; top: 54px; }
+            65% { width: 0; right: 46px; top: 54px; }
+            84% { width: 55px; right: 0px; top: 35px; }
+            100% { width: 47px; right: 8px; top: 38px; }
+        }
+        
+        .error-message {
+            color: #EF4444;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .success-message {
+            color: var(--secondary-green);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .field-group {
+            margin-bottom: 24px;
+        }
+        
+        .field-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+        
+        .required {
+            color: #EF4444;
+        }
+        
+        .form-card {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        
+        .form-card.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        
+        /* Accessibility: Respect user motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .step-card {
+                transition: none;
+            }
+            
+            .step-card:hover {
+                transform: none;
+                box-shadow: 0 8px 32px rgba(30, 78, 107, 0.1);
+            }
+            
+            .btn-primary:hover,
+            .btn-next:hover {
+                transform: none;
+            }
+            
+            .form-input {
+                transition: none;
+            }
+            
+            .fade-in {
+                animation: none;
+            }
+            
+            .progress-bar {
+                transition: none;
+            }
+            
+            .journey-step {
+                transition: none;
+            }
+            
+            .floating-animation {
+                animation: none;
+            }
+        }
+        
+        /* Enhanced focus styles for accessibility */
+        .form-input:focus {
+            outline: 3px solid var(--secondary-green);
+            outline-offset: 2px;
+            border-color: var(--secondary-green);
+            box-shadow: 0 0 0 3px rgba(164, 198, 57, 0.1);
+        }
+        
+        .btn-primary:focus,
+        .btn-secondary:focus,
+        .btn-next:focus {
+            outline: 3px solid var(--secondary-green);
+            outline-offset: 2px;
+        }
+        
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .journey-step {
+                padding: 1rem 0.75rem;
+            }
+            
+            .journey-icon-wrapper {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .journey-icon {
+                font-size: 1.25rem;
+            }
+            
+            .journey-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.7rem;
+            }
+            
+            .journey-title {
+                font-size: 0.85rem;
+            }
+            
+            .journey-description {
+                font-size: 0.7rem;
+            }
+            
+            .step-card {
+                margin: 0 8px;
+                border-radius: 12px;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-next {
+                width: 100%;
+                margin-bottom: 12px;
+            }
+        }
+    </style>
+</head>
+<body> 
+    <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Header -->
+            <header role="banner" class="text-center mb-8 animate-in" id="main-content">
+                <h1 class="text-4xl font-bold nue-primary-text mb-3 floating-animation">NueSynergy</h1>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Contact Information Update</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Please review and update your contact points. Complete each section to ensure accurate communication channels.
+                </p>
+            </header>
+            
+            <!-- Your Journey - Enhanced Interactive Progress Tracker -->
+            <nav role="navigation" aria-label="Form progress" class="mb-8">
+                <div class="process-visualization animate-in" id="journey-tracker">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold nue-primary-text flex items-center">
+                                <i class="fas fa-route mr-3 text-3xl"></i>Your Journey
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-1 ml-12">Track your progress through the form</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-3xl font-bold nue-secondary-text" id="progressText">Step 1</span>
+                            <p class="text-sm text-gray-600">of 5 steps</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Animated Progress Bar -->
+                    <div class="relative w-full bg-gray-200 rounded-full h-3 mb-8 overflow-hidden">
+                        <div class="progress-bar h-3 rounded-full transition-all duration-700 ease-out relative" id="progressBar" style="width: 20%">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive Step Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="journey-steps-container">
+                        <!-- Steps will be generated by JS -->
+                    </div>
+                </div>
+            </nav>
+
+            <div class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden step-card">
+                <form id="contactForm" class="relative">
+                    <!-- Submitter Information -->
+                    <div id="submitter-section" class="p-8 pb-0">
+                        <h2 class="text-2xl font-bold nue-primary-text mb-6">Submitter Information</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="field-group">
+                                <label for="submitter-name" class="field-label">Submitter Name<span class="required"> *</span></label>
+                                <input type="text" id="submitter-name" name="submitter-name" required class="form-input" placeholder="Your full name">
+                            </div>
+                            <div class="field-group">
+                                <label for="submitter-email" class="field-label">Submitter Email<span class="required"> *</span></label>
+                                <input type="email" id="submitter-email" name="submitter-email" required class="form-input" placeholder="you@example.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="form-container" class="p-8">
+                        <!-- Step 1: Primary Contact (This is the template) -->
+                        <div id="step-1" class="form-card" data-step="1">
+                            <h2 class="text-2xl font-bold nue-primary-text mb-6">1. Primary Contact</h2>
+                            <div class="space-y-5">
+                                <div class="flex items-center p-3 bg-slate-50 rounded-lg">
+                                    <input id="no-change-1" type="checkbox" class="checkbox-custom" onchange="toggleInputs(1)">
+                                    <label for="no-change-1" class="ml-3 block text-base font-medium text-gray-700">No changes to this contact</label>
+                                </div>
+                                <div id="inputs-1" class="space-y-4 transition-opacity duration-300">
+                                    <div class="field-group">
+                                        <label for="name-1" class="field-label">Full Name</label>
+                                        <input type="text" name="name-1" id="name-1" class="form-input" placeholder="{{ custom_values.primary_contact_full_name }}">
+                                    </div>
+                                    <div class="field-group">
+                                        <label for="title-1" class="field-label">Title</label>
+                                        <input type="text" name="title-1" id="title-1" class="form-input" placeholder="{{ custom_values.primary_contact_title }}">
+                                    </div>
+                                    <div class="field-group">
+                                        <label for="email-1" class="field-label">Email Address</label>
+                                        <input type="email" name="email-1" id="email-1" class="form-input" placeholder="{{ custom_values.primary_contact_email }}">
+                                    </div>
+                                    <div class="field-group">
+                                        <label for="phone-1" class="field-label">Phone Number</label>
+                                        <input type="tel" name="phone-1" id="phone-1" class="form-input" placeholder="{{ custom_values.primary_contact_phone }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other steps will be dynamically cloned from a template -->
+
+                        <!-- Final Confirmation Step -->
+                        <div id="step-final" class="form-card hidden" data-step="final">
+                            <div class="text-center">
+                                <div class="success-checkmark mb-6">
+                                    <div class="check-icon">
+                                        <span class="icon-line line-tip"></span>
+                                        <span class="icon-line line-long"></span>
+                                    </div>
+                                </div>
+                                <h2 class="text-3xl font-bold nue-secondary-text mt-6">Thank You!</h2>
+                                <p class="text-gray-600 mt-2 text-lg">Your contact information has been submitted for review.</p>
+                                <div id="summary" class="mt-8 text-left bg-slate-50 p-6 rounded-lg space-y-4">
+                                    <!-- Summary will be populated here -->
+                                </div>
+                                <button type="button" id="startOverBtn" class="mt-8 btn-primary">
+                                    Start Over
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div id="navigation" class="flex justify-between p-8 bg-slate-50 border-t border-slate-200">
+                        <button type="button" id="prevBtn" class="btn-secondary" disabled>
+                            Previous
+                        </button>
+                        <button type="button" id="nextBtn" class="btn-next">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen reader announcements -->
+    <div id="status-message" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="error-message" class="sr-only" role="alert" aria-live="assertive"></div>
+
+    <script>
+        'use strict';
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Configuration ---
+            const contactTypes = ['Primary', 'Secondary', 'Invoicing', 'Reports', 'Broker'];
+            const contactIcons = ['fa-user', 'fa-users', 'fa-file-invoice-dollar', 'fa-chart-bar', 'fa-handshake'];
+            const contactDescriptions = ['Main contact', 'Secondary contact', 'Billing contact', 'Reports contact', 'Broker contact'];
+            const totalSteps = contactTypes.length;
+            let currentStep = 1;
+            const formData = {};
+            const webhookUrl = 'https://services.leadconnectorhq.com/hooks/dmDqFsUr8qcR0BbIu70O/webhook-trigger/20ef4385-0cfe-4b18-8557-cc9487ec8992';
+
+            // --- DOM Elements ---
+            const formContainer = document.getElementById('form-container');
+            const contactForm = document.getElementById('contactForm');
+            const journeyStepsContainer = document.getElementById('journey-steps-container');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const finalStepCard = document.getElementById('step-final');
+            const navigation = document.getElementById('navigation');
+            const startOverBtn = document.getElementById('startOverBtn');
+            const statusMessage = document.getElementById('status-message');
+            const errorMessage = document.getElementById('error-message');
+            
+            const stepTemplate = document.getElementById('step-1');
+
+            // --- Helper Functions ---
+            
+            function announceToScreenReader(message) {
+                if (statusMessage) {
+                    statusMessage.textContent = message;
+                    setTimeout(() => {
+                        statusMessage.textContent = '';
+                    }, 1000);
+                }
+            }
+            
+            function announceError(message) {
+                if (errorMessage) {
+                    errorMessage.textContent = message;
+                    setTimeout(() => {
+                        errorMessage.textContent = '';
+                    }, 2000);
+                }
+            }
+
+            /**
+             * Clones and sets up a form step card.
+             * @param {number} step - The step number (1-based).
+             * @param {string} title - The title for the step.
+             */
+            function createStepCard(step, title) {
+                const newCard = stepTemplate.cloneNode(true);
+                newCard.id = `step-${step}`;
+                newCard.dataset.step = step;
+                
+                if (step > 1) {
+                    newCard.classList.add('hidden', 'absolute', 'top-0', 'left-0', 'w-full', 'p-8');
+                } else {
+                     newCard.classList.add('relative');
+                     newCard.classList.remove('hidden');
+                }
+                
+                newCard.querySelector('h2').textContent = `${step}. ${title} Contact`;
+                newCard.querySelector('label[for="no-change-1"]').htmlFor = `no-change-${step}`;
+                const checkbox = newCard.querySelector('#no-change-1');
+                checkbox.id = `no-change-${step}`;
+                checkbox.onchange = () => toggleInputs(step);
+                
+                const inputsContainer = newCard.querySelector('#inputs-1');
+                inputsContainer.id = `inputs-${step}`;
+
+                ['name', 'title', 'email', 'phone'].forEach(fieldType => {
+                    const label = newCard.querySelector(`label[for="${fieldType}-1"]`);
+                    const input = newCard.querySelector(`#${fieldType}-1`);
+                    if(label) label.htmlFor = `${fieldType}-${step}`;
+                    if(input) {
+                        input.id = `${fieldType}-${step}`;
+                        input.name = `${fieldType}-${step}`;
+                        input.value = '';
+                        input.classList.add('form-input');
+                    }
+                });
+                // Set placeholders based on contact type
+                const isPrimary = title === 'Primary';
+                const isSecondary = title === 'Secondary';
+                const isInvoicing = title === 'Invoicing';
+                const isReports = title === 'Reports';
+                const isBroker = title === 'Broker';
+                const nameInput = newCard.querySelector(`#name-${step}`);
+                const titleInput = newCard.querySelector(`#title-${step}`);
+                const emailInput = newCard.querySelector(`#email-${step}`);
+                const phoneInput = newCard.querySelector(`#phone-${step}`);
+                if (isPrimary) {
+                    if (nameInput) nameInput.placeholder = '{{ custom_values.primary_contact_full_name }}';
+                    if (titleInput) titleInput.placeholder = '{{ custom_values.primary_contact_title }}';
+                    if (emailInput) emailInput.placeholder = '{{ custom_values.primary_contact_email }}';
+                    if (phoneInput) phoneInput.placeholder = '{{ custom_values.primary_contact_phone }}';
+                } else if (isSecondary) {
+                    if (nameInput) nameInput.placeholder = '{{ custom_values.secondary_contact_full_name }}';
+                    if (titleInput) titleInput.placeholder = '{{ custom_values.secondary_contact_title }}';
+                    if (emailInput) emailInput.placeholder = '{{ custom_values.secondary_contact_email }}';
+                    if (phoneInput) phoneInput.placeholder = '{{ custom_values.secondary_contact_phone }}';
+                } else if (isInvoicing) {
+                    if (nameInput) nameInput.placeholder = '{{ custom_values.invoicing_contact_full_name }}';
+                    if (titleInput) titleInput.placeholder = '{{ custom_values.invoicing_contact_title }}';
+                    if (emailInput) emailInput.placeholder = '{{ custom_values.invoicing_email }}';
+                    if (phoneInput) phoneInput.placeholder = '{{ custom_values.invoicing_phone }}';
+                } else if (isReports) {
+                    if (nameInput) nameInput.placeholder = '{{ custom_values.reports_contact_full_name }}';
+                    if (titleInput) titleInput.placeholder = '{{ custom_values.reports_contact_title }}';
+                    if (emailInput) emailInput.placeholder = '{{ custom_values.reports_contact_email }}';
+                    if (phoneInput) phoneInput.placeholder = '{{ custom_values.reports_contact_phone }}';
+                } else if (isBroker) {
+                    if (nameInput) nameInput.placeholder = '{{ custom_values.broker_full_name }}';
+                    if (titleInput) titleInput.placeholder = '';
+                    if (emailInput) emailInput.placeholder = '{{ custom_values.broker_email }}';
+                    if (phoneInput) phoneInput.placeholder = '{{ custom_values.broker_phone }}';
+                } else {
+                    // Clear placeholders for other contact types
+                    if (nameInput) nameInput.placeholder = '';
+                    if (titleInput) titleInput.placeholder = '';
+                    if (emailInput) emailInput.placeholder = '';
+                    if (phoneInput) phoneInput.placeholder = '';
+                }
+                
+                checkbox.checked = false;
+                inputsContainer.style.opacity = '1';
+                Array.from(inputsContainer.querySelectorAll('input')).forEach(input => input.disabled = false);
+
+                return newCard;
+            }
+
+            /**
+             * Generates the Journey Tracker steps.
+             */
+            function initializeJourneyTracker() {
+                journeyStepsContainer.innerHTML = '';
+                contactTypes.forEach((type, index) => {
+                    const step = index + 1;
+                    const stepEl = document.createElement('div');
+                    stepEl.className = `journey-step ${step === 1 ? 'active' : 'pending'}`;
+                    stepEl.id = `journey-step-${step}`;
+                    stepEl.dataset.step = step;
+                    stepEl.innerHTML = `
+                        <div class="journey-step-inner">
+                            <div class="journey-icon-wrapper">
+                                <i class="fas ${contactIcons[index]} journey-icon"></i>
+                                <div class="journey-checkmark hidden">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="journey-number">${step}</div>
+                            <h4 class="journey-title">${type}</h4>
+                            <p class="journey-description">${contactDescriptions[index]}</p>
+                        </div>
+                    `;
+                    journeyStepsContainer.appendChild(stepEl);
+                });
+            }
+
+            /**
+             * Initializes the form by creating all step cards.
+             */
+            function initializeForm() {
+                formContainer.innerHTML = '';
+                
+                contactTypes.forEach((title, index) => {
+                    const step = index + 1;
+                    const card = createStepCard(step, title);
+                    formContainer.appendChild(card);
+                });
+                
+                formContainer.appendChild(finalStepCard);
+                updateUI();
+            }
+
+            /**
+             * Toggles input fields' disabled state based on the "No changes" checkbox.
+             * @param {number} step - The step number.
+             */
+            window.toggleInputs = function (step) {
+                const checkbox = document.getElementById(`no-change-${step}`);
+                const inputsContainer = document.getElementById(`inputs-${step}`);
+                const inputs = inputsContainer.querySelectorAll('input');
+
+                if (checkbox.checked) {
+                    inputsContainer.style.opacity = '0.5';
+                    inputs.forEach(input => {
+                        input.disabled = true;
+                        input.value = '';
+                    });
+                } else {
+                    inputsContainer.style.opacity = '1';
+                    inputs.forEach(input => input.disabled = false);
+                }
+            };
+
+            /**
+             * Shows the specified step and hides others.
+             */
+            function showStep(stepToShow) {
+                document.querySelectorAll('.form-card').forEach(card => {
+                    if (card.id === `step-${stepToShow}` || (stepToShow === 'final' && card.id === 'step-final')) {
+                        card.classList.remove('hidden', 'absolute', 'top-0', 'left-0', 'w-full', 'p-8');
+                        card.classList.add('relative');
+                        
+                        // Animate step entrance
+                        if (typeof anime !== 'undefined') {
+                            anime({
+                                targets: card,
+                                opacity: [0, 1],
+                                translateX: [50, 0],
+                                duration: 800,
+                                easing: 'easeOutExpo'
+                            });
+                        }
+                    } else {
+                        card.classList.add('hidden', 'absolute', 'top-0', 'left-0', 'w-full', 'p-8');
+                        card.classList.remove('relative');
+                    }
+                });
+                updateUI();
+            }
+
+            /**
+             * Updates the Journey Tracker and UI elements.
+             */
+            function updateJourneyTracker() {
+                const progress = (currentStep / totalSteps) * 100;
+                
+                // Update progress bar
+                if (progressBar) {
+                    if (typeof anime !== 'undefined') {
+                        anime({
+                            targets: progressBar,
+                            width: `${progress}%`,
+                            duration: 1000,
+                            easing: 'easeInOutQuad'
+                        });
+                    } else {
+                        progressBar.style.width = `${progress}%`;
+                    }
+                }
+                
+                // Update step text
+                if (progressText) {
+                    progressText.textContent = `Step ${currentStep}`;
+                }
+                
+                // Update journey step cards
+                for (let i = 1; i <= totalSteps; i++) {
+                    const journeyStep = document.getElementById(`journey-step-${i}`);
+                    if (journeyStep) {
+                        journeyStep.className = 'journey-step';
+                        
+                        if (i < currentStep) {
+                            journeyStep.classList.add('completed');
+                            // Animate checkmark
+                            if (typeof anime !== 'undefined' && i === currentStep - 1) {
+                                const checkmark = journeyStep.querySelector('.journey-checkmark');
+                                if (checkmark) {
+                                    anime({
+                                        targets: checkmark,
+                                        scale: [0, 1.2, 1],
+                                        rotate: [0, 360],
+                                        duration: 600,
+                                        easing: 'easeOutElastic(1, .6)'
+                                    });
+                                    checkmark.classList.remove('hidden');
+                                }
+                            }
+                        } else if (i === currentStep) {
+                            journeyStep.classList.add('active');
+                            // Pulse animation
+                            if (typeof anime !== 'undefined') {
+                                anime({
+                                    targets: journeyStep,
+                                    scale: [1, 1.05, 1],
+                                    duration: 600,
+                                    easing: 'easeInOutQuad'
+                                });
+                            }
+                        } else {
+                            journeyStep.classList.add('pending');
+                        }
+                    }
+                }
+            }
+
+            /**
+             * Updates the UI elements like buttons.
+             */
+            function updateUI() {
+                updateJourneyTracker();
+                
+                // Update buttons
+                prevBtn.disabled = currentStep === 1;
+                if (currentStep === totalSteps) {
+                    nextBtn.textContent = 'Submit';
+                } else {
+                    nextBtn.textContent = 'Next';
+                }
+            }
+            
+            /**
+             * Gathers data from the current step.
+             */
+            function collectStepData() {
+                const step = currentStep;
+                const noChange = document.getElementById(`no-change-${step}`).checked;
+                const contactType = contactTypes[step - 1];
+                
+                formData[contactType] = {
+                    status: noChange ? 'No Change' : 'Updated',
+                    name: document.getElementById(`name-${step}`).value,
+                    title: document.getElementById(`title-${step}`).value,
+                    email: document.getElementById(`email-${step}`).value,
+                    phone: document.getElementById(`phone-${step}`).value
+                };
+            }
+
+            /**
+             * Displays the final summary.
+             */
+            function showSummary() {
+                const summaryContainer = document.getElementById('summary');
+                summaryContainer.innerHTML = '';
+                
+                for (const [contactType, data] of Object.entries(formData)) {
+                    if (contactType === 'Submitter') continue;
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'pb-4 border-b border-slate-200 last:border-b-0';
+                    let content;
+                    if (data.status === 'No Change') {
+                        content = `
+                            <h3 class="font-bold nue-primary-text">${contactType} Contact</h3>
+                            <p class="text-gray-500">No changes were made.</p>
+                        `;
+                    } else {
+                        content = `
+                            <h3 class="font-bold nue-primary-text">${contactType} Contact <span class="text-xs font-medium bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full ml-2">UPDATED</span></h3>
+                            <ul class="mt-2 text-sm text-gray-700 space-y-1">
+                                <li><strong>Name:</strong> ${data.name || 'N/A'}</li>
+                                <li><strong>Title:</strong> ${data.title || 'N/A'}</li>
+                                <li><strong>Email:</strong> ${data.email || 'N/A'}</li>
+                                <li><strong>Phone:</strong> ${data.phone || 'N/A'}</li>
+                            </ul>
+                        `;
+                    }
+                    entryDiv.innerHTML = content;
+                    summaryContainer.appendChild(entryDiv);
+                }
+            }
+
+            // Initialize animations
+            function initAnimeAnimations() {
+                if (typeof anime === 'undefined') return;
+                
+                // Animate header on load
+                anime({
+                    targets: 'header.animate-in',
+                    opacity: [0, 1],
+                    translateY: [-30, 0],
+                    duration: 1200,
+                    easing: 'easeOutExpo'
+                });
+                
+                // Animate journey tracker
+                anime({
+                    targets: '#journey-tracker',
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    duration: 1000,
+                    delay: 300,
+                    easing: 'easeOutExpo'
+                });
+                
+                // Animate journey step cards with stagger
+                anime({
+                    targets: '.journey-step',
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    scale: [0.9, 1],
+                    delay: anime.stagger(80, {start: 600}),
+                    duration: 800,
+                    easing: 'easeOutElastic(1, .6)'
+                });
+            }
+
+            // --- Event Listeners ---
+            nextBtn.addEventListener('click', async () => {
+                // On first click, validate submitter info and capture it
+                if (currentStep === 1) {
+                    const submitterName = document.getElementById('submitter-name');
+                    const submitterEmail = document.getElementById('submitter-email');
+                    if (!submitterName.checkValidity() || !submitterEmail.checkValidity()) {
+                        submitterName.reportValidity();
+                        submitterEmail.reportValidity();
+                        announceError('Please fill in all required fields before continuing.');
+                        return;
+                    }
+                    formData.Submitter = {
+                        name: submitterName.value,
+                        email: submitterEmail.value
+                    };
+                }
+
+                collectStepData();
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                    announceToScreenReader(`Moved to step ${currentStep}`);
+                } else {
+                    // --- WEBHOOK SUBMISSION LOGIC ---
+                    console.log('Submitting form data:', formData);
+                    announceToScreenReader('Submitting form, please wait...');
+                    try {
+                        const response = await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData),
+                        });
+
+                        if (!response.ok) {
+                            console.error('Webhook submission failed:', response.status, response.statusText);
+                            const responseBody = await response.text();
+                            console.error('Response body:', responseBody);
+                            announceError('Form submission failed. Please try again.');
+                        } else {
+                            console.log('Webhook submission successful!');
+                            announceToScreenReader('Form submitted successfully!');
+                        }
+                    } catch (error) {
+                        console.error('Error submitting to webhook:', error);
+                        announceError('Error submitting form. Please try again.');
+                    }
+                    // --- END WEBHOOK LOGIC ---
+
+                    // Show the final confirmation screen regardless of webhook success/failure
+                    navigation.classList.add('hidden');
+                    showSummary();
+                    showStep('final');
+                    announceToScreenReader('Form completed successfully!');
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                    announceToScreenReader(`Moved back to step ${currentStep}`);
+                }
+            });
+            
+            startOverBtn.addEventListener('click', () => {
+                // Reset form fields including submitter inputs
+                if (contactForm) {
+                    contactForm.reset();
+                }
+                // Reset state and UI
+                currentStep = 1;
+                Object.keys(formData).forEach(key => delete formData[key]);
+                navigation.classList.remove('hidden');
+                // Rebuild journey tracker and form steps
+                initializeJourneyTracker();
+                initializeForm();
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                announceToScreenReader('Form reset. Starting over.');
+            });
+
+            // --- Initialization ---
+            initializeJourneyTracker();
+            initializeForm();
+            initAnimeAnimations();
+            announceToScreenReader('Form loaded and ready');
+        });
+    </script>
+</body>
+</html>

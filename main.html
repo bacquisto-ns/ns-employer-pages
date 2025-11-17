@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NueSynergy Forms Portal</title>
+    <meta name="description" content="Access NueSynergy forms and services - Contact Changes, Flexible Spending, COBRA, and Support">
+    
+    <!-- Performance: Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- CSS Frameworks & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-blue: #1E4E6B;
+            --primary-blue-light: #2a5f7a;
+            --accent-green: #A4C639;
+            --accent-green-hover: #8fb332;
+            --text-primary: #2d3748;
+            --text-secondary: #64748b;
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #e8f2f6;
+            --bg-card: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(30, 78, 107, 0.2);
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(164, 198, 57, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .contact-info {
+            margin-top: 16px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .page-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Card Styles */
+        .service-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            padding: 40px 30px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(30, 78, 107, 0.15);
+            border-color: var(--accent-green);
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 78, 107, 0.3);
+        }
+        
+        .service-card:hover .card-icon {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-hover) 100%);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(164, 198, 57, 0.4);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .card-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .card-cta {
+            color: var(--accent-green);
+            transform: translateX(4px);
+        }
+        
+        .card-cta i {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .card-cta i {
+            transform: translateX(4px);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .service-card {
+                padding: 30px 24px;
+            }
+            
+            .card-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* Loading State */
+        .fade-in {
+            opacity: 0;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header animate-in">
+        <div class="header-content">
+            <div class="logo">NueSynergy</div>
+            <div class="tagline">CUSTOMER FOCUSED & TECHNOLOGY DRIVEN</div>
+            <div class="contact-info">
+                <i class="fas fa-phone mr-2"></i>1-800-413-4138 | 
+                <i class="fas fa-envelope ml-2 mr-2"></i>employersupport@nuesynergy.com
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-title fade-in">
+            <h1>Forms & Services Portal</h1>
+            <p>Select a service below to get started</p>
+        </div>
+        
+        <!-- Cards Grid -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- Contact Changes Card -->
+            <a href="https://app.nuesynergyinfo.com/v2/preview/eHViL0LIiEYVMff4F8EX" class="service-card fade-in" aria-label="Navigate to Contact Changes form">
+                <div class="card-icon">
+                    <i class="fas fa-address-card"></i>
+                </div>
+                <h2 class="card-title">Contact Changes</h2>
+                <p class="card-description">
+                    Update your personal information, address, phone number, or email address on file.
+                </p>
+                <div class="card-cta">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+            
+            <!-- Flexible Spending Card -->
+            <a href="#" class="service-card fade-in" aria-label="Navigate to Flexible Spending form">
+                <div class="card-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h2 class="card-title">Flexible Spending</h2>
+                <p class="card-description">
+                    Manage your Flexible Spending Account (FSA) and submit claims for reimbursement.
+                </p>
+                <div class="card-cta">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+            
+            <!-- COBRA Card -->
+            <a href="#" class="service-card fade-in" aria-label="Navigate to COBRA form">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2 class="card-title">COBRA</h2>
+                <p class="card-description">
+                    Continue your health coverage through COBRA. Enroll or manage your existing plan.
+                </p>
+                <div class="card-cta">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+            
+            <!-- NueSynergy Support Card -->
+            <a href="#" class="service-card fade-in" aria-label="Navigate to NueSynergy Support">
+                <div class="card-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h2 class="card-title">NueSynergy Support</h2>
+                <p class="card-description">
+                    Get help with your account, forms, or general questions. Our support team is here to assist you.
+                </p>
+                <div class="card-cta">
+                    Get Support <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 NueSynergy. All rights reserved.</p>
+    </footer>
+    
+    <!-- Screen Reader Announcements -->
+    <div id="status-message" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="error-message" class="sr-only" role="alert" aria-live="assertive"></div>
+    
+    <script>
+        'use strict';
+        
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initAnimations();
+            announceToScreenReader('NueSynergy Forms Portal loaded. Select a service to get started.');
+        });
+        
+        // Initialize page animations
+        function initAnimations() {
+            if (typeof anime === 'undefined') {
+                // Fallback if anime.js doesn't load
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+                return;
+            }
+            
+            // Animate header
+            anime({
+                targets: '.header',
+                opacity: [0, 1],
+                translateY: [-30, 0],
+                duration: 1200,
+                easing: 'easeOutExpo'
+            });
+            
+            // Animate page title
+            anime({
+                targets: '.page-title',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 800,
+                delay: 200,
+                easing: 'easeOutExpo'
+            });
+            
+            // Animate cards with stagger
+            anime({
+                targets: '.service-card',
+                opacity: [0, 1],
+                translateY: [40, 0],
+                scale: [0.9, 1],
+                delay: anime.stagger(100, {start: 400}),
+                duration: 800,
+                easing: 'easeOutElastic(1, .6)',
+                complete: function() {
+                    document.querySelectorAll('.fade-in').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }
+            });
+        }
+        
+        // Screen reader announcements
+        function announceToScreenReader(message) {
+            const statusEl = document.getElementById('status-message');
+            if (statusEl) {
+                statusEl.textContent = message;
+                setTimeout(() => {
+                    statusEl.textContent = '';
+                }, 1000);
+            }
+        }
+        
+        function announceError(message) {
+            const errorEl = document.getElementById('error-message');
+            if (errorEl) {
+                errorEl.textContent = message;
+                setTimeout(() => {
+                    errorEl.textContent = '';
+                }, 2000);
+            }
+        }
+        
+        // Add hover sound effect (optional - can be removed if not needed)
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: this.querySelector('.card-icon'),
+                        scale: [1, 1.1],
+                        rotate: [0, 5],
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: this.querySelector('.card-icon'),
+                        scale: [1.1, 1],
+                        rotate: [5, 0],
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                }
+            });
+        });
+        
+        // Keyboard navigation enhancement
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
