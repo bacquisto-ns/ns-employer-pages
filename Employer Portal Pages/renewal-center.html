@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renewal Center | NueSynergy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #1E4E6B;
+            --accent-green: #A4C639;
+            --info-blue: #3b82f6;
+            --bg-primary: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: #2d3748;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a5f7a 100%);
+            color: white;
+        }
+
+        .renewal-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .renewal-header {
+            background: #f8fafc;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item:hover {
+            background: #f8fafc;
+        }
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checkbox-custom.checked {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), #8fb332);
+            color: white;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(164, 198, 57, 0.3);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: #fff7ed;
+            color: #c2410c;
+            border: 1px solid #ffedd5;
+        }
+
+        .status-completed {
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #dcfce7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="header p-6 shadow-lg">
+            <div class="container mx-auto flex items-center gap-4">
+                <a href="main.html" class="text-white hover:text-gray-200 transition-colors">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </a>
+                <h1 class="text-2xl font-bold">Renewal Center</h1>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto p-6 flex-grow max-w-5xl">
+            <div class="mb-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">2026 Plan Year Renewals</h2>
+                <p class="text-gray-600">Complete the checklist below to finalize your benefit renewals.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Checklist -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- FSA Renewal Card -->
+                    <div class="renewal-card animate-in">
+                        <div class="renewal-header">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">FSA Renewal</h3>
+                                    <span class="text-xs text-gray-500">Due: Dec 15, 2025</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-pending">In Progress</span>
+                        </div>
+                        <div class="p-0">
+                            <div class="checklist-item">
+                                <div class="checkbox-custom checked" onclick="toggleCheck(this)">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="font-medium">Review Plan Design</h4>
+                                    <p class="text-sm text-gray-500">Verify contribution limits and carryover options.
+                                    </p>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium hover:underline">Review</button>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checkbox-custom" onclick="toggleCheck(this)"></div>
+                                <div class="flex-grow">
+                                    <h4 class="font-medium">Confirm Employee Eligibility</h4>
+                                    <p class="text-sm text-gray-500">Update census data for the new plan year.</p>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium hover:underline">Upload</button>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checkbox-custom" onclick="toggleCheck(this)"></div>
+                                <div class="flex-grow">
+                                    <h4 class="font-medium">Sign Adoption Agreement</h4>
+                                    <p class="text-sm text-gray-500">Digital signature required by authorized admin.</p>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium hover:underline">Sign</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HSA Renewal Card -->
+                    <div class="renewal-card animate-in" style="animation-delay: 100ms;">
+                        <div class="renewal-header">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">HSA Renewal</h3>
+                                    <span class="text-xs text-gray-500">Due: Dec 1, 2025</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-pending">Action Required</span>
+                        </div>
+                        <div class="p-0">
+                            <div class="checklist-item">
+                                <div class="checkbox-custom" onclick="toggleCheck(this)"></div>
+                                <div class="flex-grow">
+                                    <h4 class="font-medium">Set Employer Contribution</h4>
+                                    <p class="text-sm text-gray-500">Define 2026 contribution amounts.</p>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium hover:underline">Edit</button>
+                            </div>
+                            <div class="checklist-item">
+                                <div class="checkbox-custom" onclick="toggleCheck(this)"></div>
+                                <div class="flex-grow">
+                                    <h4 class="font-medium">Verify Banking Info</h4>
+                                    <p class="text-sm text-gray-500">Confirm funding account details.</p>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium hover:underline">Verify</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-6">
+                        <h3 class="font-bold text-lg mb-4">Renewal Progress</h3>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">Overall Completion</span>
+                                <span class="font-bold text-blue-600">20%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-600">COBRA Renewal Completed</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-clock text-orange-500"></i>
+                                <span class="text-gray-600">FSA Renewal In Progress</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-exclamation-circle text-red-500"></i>
+                                <span class="text-gray-600">HSA Renewal Pending</span>
+                            </div>
+                        </div>
+
+                        <button class="w-full btn-primary mb-3">Submit All Renewals</button>
+                        <button
+                            class="w-full py-2 border border-gray-300 rounded-lg text-gray-600 text-sm font-medium hover:bg-gray-50">Download
+                            Summary PDF</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+            const icon = element.querySelector('i');
+
+            if (element.classList.contains('checked')) {
+                if (!icon) {
+                    element.innerHTML = '<i class="fas fa-check"></i>';
+                }
+                // Animation
+                anime({
+                    targets: element,
+                    scale: [0.8, 1],
+                    duration: 300,
+                    easing: 'spring(1, 80, 10, 0)'
+                });
+            } else {
+                element.innerHTML = '';
+            }
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            // Mock progress update logic
+            const total = document.querySelectorAll('.checkbox-custom').length;
+            const checked = document.querySelectorAll('.checkbox-custom.checked').length;
+            const percentage = Math.round((checked / total) * 100);
+
+            document.querySelector('.font-bold.text-blue-600').textContent = `${percentage}%`;
+            document.querySelector('.bg-blue-600.h-2.5').style.width = `${percentage}%`;
+        }
+
+        // Initial Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            anime({
+                targets: '.animate-in',
+                translateY: [20, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(100),
+                duration: 800,
+                easing: 'easeOutExpo'
+            });
+        });
+    </script>
+</body>
+
+</html>
